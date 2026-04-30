@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+    <title>{title} | Pingus Crochet Corner</title>
+    <style is:global>
+      .font-serif { font-family: 'Merriweather', serif; }
+    </style>
+  </head>
+  <body class="bg-stone-900 text-stone-100 min-h-screen">
+    <header class="sticky top-0 bg-stone-900/95 backdrop-blur-sm border-b border-stone-700 z-50">
+      <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 hover:text-amber-400 transition">
+          <img src="/logo.png" alt="Logo" class="h-35 w-auto -mb-5" />
+          <span class="text-xl font-serif text-stone-100 -mb-5">Pingus Crochet Corner</span>
+        </a>
+        <ul class="flex gap-6 text-sm">
+          <li><a href="/" class="hover:text-amber-400 transition">Home</a></li>
+          <li><a href="/about" class="hover:text-amber-400 transition">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <slot />
+    </main>
+    <footer class="text-center py-8 text-stone-500 text-sm border-t border-stone-700 mt-auto">
+      <p>Made by 🐰 for 🐧</p>
+    </footer>
+  </body>
+</html>

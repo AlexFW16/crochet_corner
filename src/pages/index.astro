@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const statusOrder = { 'in-progress': 0, completed: 1, future: 2 };
+const sortedProjects = projects.sort((a, b) => {
+  const statusDiff = statusOrder[a.data.status] - statusOrder[b.data.status];
+  if (statusDiff !== 0) return statusDiff;
+  return b.data.createdAt.getTime() - a.data.createdAt.getTime();
+});
+
+const inProgress = sortedProjects.filter(p => p.data.status === 'in-progress');
+const completed = sortedProjects.filter(p => p.data.status === 'completed');
+const future = sortedProjects.filter(p => p.data.status === 'future');
+---
+
+<Layout title="Home">
+  <section class="text-center py-12">
+    <h1 class="text-4xl font-serif text-stone-100 mb-4">🧶 Pingus Crochet Corner</h1>
+    <p class="text-lg text-stone-400 max-w-2xl mx-auto">
+      Handmade crochet creations made with love.
+    </p>
+  </section>
+  
+  {inProgress.length > 0 && (
+    <section class="mb-12">
+      <h2 class="text-2xl font-serif mb-6 text-stone-100">Currently Working On</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {inProgress.map(project => (
+          <a href={`/projects/${project.data.slug}`} class="block group">
+            <article class="bg-stone-800 rounded-lg overflow-hidden border border-stone-700 hover:border-amber-500 transition h-full">
+              <div class="aspect-square bg-stone-700 overflow-hidden">
+                {project.data.coverImage ? (
+                  <img src={project.data.coverImage} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="text-5xl">🧶</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-4">
+                <span class="text-xs text-amber-400 font-medium">In Progress</span>
+                <h3 class="font-serif text-lg mt-1 text-stone-100 group-hover:text-amber-400 transition">{project.data.title}</h3>
+                <p class="text-sm text-stone-400 mt-1">{project.data.shortDescription}</p>
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+  
+  {completed.length > 0 && (
+    <section class="mb-12">
+      <h2 class="text-2xl font-serif mb-6 text-stone-100">Completed</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {completed.map(project => (
+          <a href={`/projects/${project.data.slug}`} class="block group">
+            <article class="bg-stone-800 rounded-lg overflow-hidden border border-stone-700 hover:border-amber-500 transition h-full">
+              <div class="aspect-square bg-stone-700 overflow-hidden">
+                {project.data.coverImage ? (
+                  <img src={project.data.coverImage} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="text-5xl">🧶</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-4">
+                <span class="text-xs text-green-400 font-medium">Completed</span>
+                <h3 class="font-serif text-lg mt-1 text-stone-100 group-hover:text-amber-400 transition">{project.data.title}</h3>
+                <p class="text-sm text-stone-400 mt-1">{project.data.shortDescription}</p>
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+  
+  {future.length > 0 && (
+    <section>
+      <h2 class="text-2xl font-serif mb-6 text-stone-100">Future Plans</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {future.map(project => (
+          <a href={`/projects/${project.data.slug}`} class="block group">
+            <article class="bg-stone-800 rounded-lg overflow-hidden border border-stone-700 hover:border-amber-500 transition h-full">
+              <div class="aspect-square bg-stone-700 overflow-hidden">
+                {project.data.coverImage ? (
+                  <img src={project.data.coverImage} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="text-5xl">🧶</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-4">
+                <span class="text-xs text-blue-400 font-medium">Future</span>
+                <h3 class="font-serif text-lg mt-1 text-stone-100 group-hover:text-amber-400 transition">{project.data.title}</h3>
+                <p class="text-sm text-stone-400 mt-1">{project.data.shortDescription}</p>
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</Layout>
