@@ -17,18 +17,18 @@ const future = sortedProjects.filter(p => p.data.status === 'future');
 
 <Layout title="Home">
   <section class="text-center py-12">
-    <h1 class="text-4xl font-serif text-stone-100 mb-4">🧶 Pingus Crochet Corner</h1>
-    <p class="text-lg text-stone-400 max-w-2xl mx-auto">
-      Handmade crochet creations made with love.
+    <h1 class="text-4xl font-serif text-stone-100 mb-4 drop-shadow-xl">Pingu's Crochet Corner</h1>
+    <p class="text-lg text-stone-300 max-w-2xl mx-auto drop-shadow-lg">
+      My new most favourite thing to do!
     </p>
   </section>
   
   {inProgress.length > 0 && (
     <section class="mb-12">
-      <h2 class="text-2xl font-serif mb-6 text-stone-100">Currently Working On</h2>
+      <h2 class="text-2xl font-serif mb-6 text-amber-400 font-bold bg-gradient-to-r from-amber-900/40 to-stone-800/40 px-4 py-2 rounded-full border border-amber-500/20 shadow-md">Currently Working On</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {inProgress.map(project => (
-          <a href={`/projects/${project.data.slug}`} class="block group">
+{inProgress.map(project => (
+           <a href={`/projects/${project.data.slug}`} class="block group">
             <article class="bg-stone-800 rounded-lg overflow-hidden border border-stone-700 hover:border-amber-500 transition h-full">
               <div class="aspect-square bg-stone-700 overflow-hidden">
                 {project.data.coverImage ? (
@@ -53,10 +53,10 @@ const future = sortedProjects.filter(p => p.data.status === 'future');
   
   {completed.length > 0 && (
     <section class="mb-12">
-      <h2 class="text-2xl font-serif mb-6 text-stone-100">Completed</h2>
+      <h2 class="text-2xl font-serif mb-6 text-green-400 font-bold bg-gradient-to-r from-green-900/40 to-stone-800/40 px-4 py-2 rounded-full border border-green-500/20 shadow-md">Completed</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {completed.map(project => (
-          <a href={`/projects/${project.data.slug}`} class="block group">
+{completed.map(project => (
+           <a href={`/projects/${project.data.slug}`} class="block group">
             <article class="bg-stone-800 rounded-lg overflow-hidden border border-stone-700 hover:border-amber-500 transition h-full">
               <div class="aspect-square bg-stone-700 overflow-hidden">
                 {project.data.coverImage ? (
@@ -81,10 +81,10 @@ const future = sortedProjects.filter(p => p.data.status === 'future');
   
   {future.length > 0 && (
     <section>
-      <h2 class="text-2xl font-serif mb-6 text-stone-100">Future Plans</h2>
+      <h2 class="text-2xl font-serif mb-6 text-blue-400 font-bold bg-gradient-to-r from-blue-900/40 to-stone-800/40 px-4 py-2 rounded-full border border-blue-500/20 shadow-md">Future Plans</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {future.map(project => (
-          <a href={`/projects/${project.data.slug}`} class="block group">
+{future.map(project => (
+           <a href={`/projects/${project.data.slug}`} class="block group">
             <article class="bg-stone-800 rounded-lg overflow-hidden border border-stone-700 hover:border-amber-500 transition h-full">
               <div class="aspect-square bg-stone-700 overflow-hidden">
                 {project.data.coverImage ? (

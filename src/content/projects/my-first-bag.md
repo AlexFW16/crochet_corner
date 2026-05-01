@@ -1,10 +1,9 @@
 ---
 title: "My First Bag"
-slug: "my-first-bag"
+slug: my-first-bag
 shortDescription: "First bag made: combined bag with different straps"
-coverImage: ""
+coverImage: "/logo.png"
 status: "completed"
-images:
 sources:
   - type: "youtube"
     title: "Bag Tutorial"

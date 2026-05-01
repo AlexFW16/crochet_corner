@@ -17,21 +17,22 @@ const { title } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
-    <title>{title} | Pingus Crochet Corner</title>
+    <title>{title} | Pingu's Crochet Corner</title>
     <style is:global>
       .font-serif { font-family: 'Merriweather', serif; }
     </style>
   </head>
-  <body class="bg-stone-900 text-stone-100 min-h-screen">
+  <body class="bg-stone-900 text-stone-100 min-h-screen bg-[url('/background.jpg')] bg-cover bg-center bg-fixed bg-no-repeat relative">
+    <div class="fixed inset-0 bg-stone-900/70 -z-10"></div>
     <header class="sticky top-0 bg-stone-900/95 backdrop-blur-sm border-b border-stone-700 z-50">
-      <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <nav class="max-w-6xl mx-auto px-4 py-1 flex items-center justify-between">
         <a href="/" class="flex items-center gap-3 hover:text-amber-400 transition">
-          <img src="/logo.png" alt="Logo" class="h-35 w-auto -mb-5" />
-          <span class="text-xl font-serif text-stone-100 -mb-5">Pingus Crochet Corner</span>
+          <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+          <span class="text-lg font-serif text-stone-100">Pingu's Crochet Corner</span>
         </a>
         <ul class="flex gap-6 text-sm">
           <li><a href="/" class="hover:text-amber-400 transition">Home</a></li>
-          <li><a href="/about" class="hover:text-amber-400 transition">About</a></li>
+          <li><a href="/about/" class="hover:text-amber-400 transition">About</a></li>
         </ul>
       </nav>
     </header>
