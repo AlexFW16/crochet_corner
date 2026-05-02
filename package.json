@@ -7,10 +7,10 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/fix-paths.js",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && gh-pages -d dist"
+    "deploy": "npm run build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",
