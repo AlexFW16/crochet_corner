@@ -8,9 +8,10 @@ const files = fs.readdirSync(DIST, { recursive: true });
 
 for (const file of files) {
   if (typeof file !== 'string') continue;
-  if (!file.endsWith('.html')) continue;
 
   const filePath = path.join(DIST, file);
+  if (!file.endsWith('.html') && !file.endsWith('.css')) continue;
+
   let content = fs.readFileSync(filePath, 'utf8');
 
   content = content
@@ -19,7 +20,10 @@ for (const file of files) {
     .replace(/href='\//g, `href='${BASE}/`)
     .replace(/src='\//g, `src='${BASE}/`)
     .replace(/url\('\//g, `url('${BASE}/`)
-    .replace(/url\("\//g, `url("${BASE}/`);
+    .replace(/url\("\//g, `url("${BASE}/`)
+    .replace(/url\(\'\//g, `url('${BASE}/`)
+    .replace(/url\(\"\//g, `url("${BASE}/`)
+    .replace(/url\(\//g, `url(${BASE}/`);
 
   fs.writeFileSync(filePath, content);
 }
