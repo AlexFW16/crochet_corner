@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  base: '/crochet_corner',
   output: 'static',
   vite: {
     plugins: [tailwindcss()]
