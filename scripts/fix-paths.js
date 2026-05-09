@@ -16,7 +16,11 @@ for (const file of files) {
 
   content = content
     .replace(/href="\//g, `href="${BASE}/`)
-    .replace(/src="\//g, `src="${BASE}/`);
+    .replace(/src="\//g, `src="${BASE}/`)
+    .replace(/url\('\//g, `url('${BASE}/`)
+    .replace(/url\("\//g, `url("${BASE}/`)
+    .replace(/\/crochet_corner\/crochet_corner\//g, '/crochet_corner/')
+    .replace(/\/crochet_corner\/crochet_corner\//g, '/crochet_corner/');
 
   fs.writeFileSync(filePath, content);
 }
