@@ -13,6 +13,8 @@ const sortedProjects = projects.sort((a, b) => {
 const inProgress = sortedProjects.filter(p => p.data.status === 'in-progress');
 const completed = sortedProjects.filter(p => p.data.status === 'completed');
 const future = sortedProjects.filter(p => p.data.status === 'future');
+
+const featured = projects.find(p => p.data.slug === 'ocean-pouch');
 ---
 
 <Layout title="Home">
@@ -22,6 +24,25 @@ const future = sortedProjects.filter(p => p.data.status === 'future');
       My new most favourite thing to do!
     </p>
   </section>
+
+  {featured && (
+    <section class="mb-8">
+      <a href={`/projects/${featured.data.slug}`} class="block group">
+        <article class="bg-gradient-to-br from-cyan-900/30 to-stone-800/30 rounded-lg overflow-hidden border border-cyan-500/30 hover:border-cyan-400 transition">
+          <div class="flex items-center gap-4 p-4">
+            <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+              <img src={featured.data.coverImage} alt={featured.data.title} class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            </div>
+            <div>
+              <span class="text-xs text-cyan-400">✨ Proud of this!</span>
+              <h3 class="font-serif text-lg text-stone-100 group-hover:text-cyan-400 transition">{featured.data.title}</h3>
+              <p class="text-sm text-stone-400">{featured.data.shortDescription}</p>
+            </div>
+          </div>
+        </article>
+      </a>
+    </section>
+  )}
   
   {inProgress.length > 0 && (
     <section class="mb-12">
