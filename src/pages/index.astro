@@ -3,14 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
-const statusOrder = { 'in-progress': 0, completed: 1, future: 2 };
+const statusOrder = { completed: 0, future: 1 };
 const sortedProjects = projects.sort((a, b) => {
   const statusDiff = statusOrder[a.data.status] - statusOrder[b.data.status];
   if (statusDiff !== 0) return statusDiff;
   return b.data.createdAt.getTime() - a.data.createdAt.getTime();
 });
 
-const inProgress = sortedProjects.filter(p => p.data.status === 'in-progress');
 const completed = sortedProjects.filter(p => p.data.status === 'completed');
 const future = sortedProjects.filter(p => p.data.status === 'future');
 
@@ -25,52 +24,52 @@ const featured = projects.find(p => p.data.slug === 'ocean-pouch');
     </p>
   </section>
 
-  {featured && (
-    <section class="mb-8">
-      <a href={`/projects/${featured.data.slug}`} class="block group">
-        <article class="bg-gradient-to-br from-cyan-900/30 to-stone-800/30 rounded-lg overflow-hidden border border-cyan-500/30 hover:border-cyan-400 transition">
-          <div class="flex items-center gap-4 p-4">
-            <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
-              <img src={featured.data.coverImage} alt={featured.data.title} class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+    {featured && (
+      <section class="mb-8">
+        <a href={`/projects/${featured.data.slug}`} class="block group">
+          <article class="bg-gradient-to-br from-cyan-900/30 to-stone-800/30 rounded-lg overflow-hidden border border-cyan-500/30 hover:border-cyan-400 transition">
+            <div class="flex items-center gap-4 p-4">
+              <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                <img src={featured.data.coverImage} alt={featured.data.title} class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              </div>
+              <div>
+                <span class="text-xs text-cyan-400">✨ Proud of this!</span>
+                <h3 class="font-serif text-lg text-stone-100 group-hover:text-cyan-400 transition">{featured.data.title}</h3>
+                <p class="text-sm text-stone-400">{featured.data.shortDescription}</p>
+              </div>
             </div>
-            <div>
-              <span class="text-xs text-cyan-400">✨ Proud of this!</span>
-              <h3 class="font-serif text-lg text-stone-100 group-hover:text-cyan-400 transition">{featured.data.title}</h3>
-              <p class="text-sm text-stone-400">{featured.data.shortDescription}</p>
-            </div>
-          </div>
-        </article>
-      </a>
-    </section>
-  )}
+          </article>
+        </a>
+      </section>
+    )}
   
-  {inProgress.length > 0 && (
-    <section class="mb-12">
-      <h2 class="text-2xl font-serif mb-6 text-amber-400 font-bold bg-gradient-to-r from-amber-900/40 to-stone-800/40 px-4 py-2 rounded-full border border-amber-500/20 shadow-md">Currently Working On</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-{inProgress.map(project => (
-           <a href={`/projects/${project.data.slug}`} class="block group">
-            <article class="bg-stone-800 rounded-lg overflow-hidden border border-stone-700 hover:border-amber-500 transition h-full">
-              <div class="aspect-square bg-stone-700 overflow-hidden">
-                {project.data.coverImage ? (
-                  <img src={project.data.coverImage} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
-                ) : (
-                  <div class="w-full h-full flex items-center justify-center">
-                    <span class="text-5xl">🧶</span>
-                  </div>
-                )}
-              </div>
-              <div class="p-4">
-                <span class="text-xs text-amber-400 font-medium">In Progress</span>
-                <h3 class="font-serif text-lg mt-1 text-stone-100 group-hover:text-amber-400 transition">{project.data.title}</h3>
-                <p class="text-sm text-stone-400 mt-1">{project.data.shortDescription}</p>
-              </div>
-            </article>
-          </a>
-        ))}
-      </div>
-    </section>
-  )}
+<!--   {inProgress.length > 0 && ( -->
+<!--     <section class="mb-12"> -->
+<!--       <h2 class="text-2xl font-serif mb-6 text-amber-400 font-bold bg-gradient-to-r from-amber-900/40 to-stone-800/40 px-4 py-2 rounded-full border border-amber-500/20 shadow-md">Currently Working On</h2> -->
+<!--       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> -->
+<!-- {inProgress.map(project => ( -->
+<!--            <a href={`/projects/${project.data.slug}`} class="block group"> -->
+<!--             <article class="bg-stone-800 rounded-lg overflow-hidden border border-stone-700 hover:border-amber-500 transition h-full"> -->
+<!--               <div class="aspect-square bg-stone-700 overflow-hidden"> -->
+<!--                 {project.data.coverImage ? ( -->
+<!--                   <img src={project.data.coverImage} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition duration-300" /> -->
+<!--                 ) : ( -->
+<!--                   <div class="w-full h-full flex items-center justify-center"> -->
+<!--                     <span class="text-5xl">🧶</span> -->
+<!--                   </div> -->
+<!--                 )} -->
+<!--               </div> -->
+<!--               <div class="p-4"> -->
+<!--                 <span class="text-xs text-amber-400 font-medium">In Progress</span> -->
+<!--                 <h3 class="font-serif text-lg mt-1 text-stone-100 group-hover:text-amber-400 transition">{project.data.title}</h3> -->
+<!--                 <p class="text-sm text-stone-400 mt-1">{project.data.shortDescription}</p> -->
+<!--               </div> -->
+<!--             </article> -->
+<!--           </a> -->
+<!--         ))} -->
+<!--       </div> -->
+<!--     </section> -->
+<!--   )} -->
   
   {completed.length > 0 && (
     <section class="mb-12">
